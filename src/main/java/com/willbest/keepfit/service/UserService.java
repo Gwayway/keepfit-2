@@ -24,7 +24,7 @@ public class UserService<T>{
             return new restful("exist",null,"s");
         }else {
             studentMapper.save(student);
-            return  new restful("createsucce",student.getPhonenum(),"s");
+            return  new restful("createsucce",student.getPhonenum()+":"+student.getUsername(),"s");
         }
     }
     public restful login1(student student){
@@ -33,7 +33,7 @@ public class UserService<T>{
         student neostu= studentMapper.findByPhonenum(phonenum);
         if (state){
             if (student.getPassword().equals(neostu.getPassword())){
-                return  new restful("loginsucce",student.getPhonenum(),"s");
+                return  new restful("loginsucce",student.getPhonenum()+":"+neostu.getUsername(),"s");
             }else {
                 return  new restful("passworserro",null,"s");
             }
@@ -48,7 +48,7 @@ public class UserService<T>{
             return new restful("exist",null,"t");
         }else {
             teacherMapper.save(teacher);
-            return  new restful("createsucce",teacher.getPhonenum(),"t");
+            return  new restful("createsucce",teacher.getPhonenum()+":"+teacher.getUsername(),"t");
         }
     }
     public restful login2(teacher teacher){
@@ -57,7 +57,7 @@ public class UserService<T>{
         teacher neostec= teacherMapper.findByPhonenum(phonenum);
         if (state){
             if (teacher.getPassword().equals(neostec.getPassword())){
-                return  new restful("loginsucce",teacher.getPhonenum(),"t");
+                return  new restful("loginsucce",teacher.getPhonenum()+":"+neostec.getUsername(),"t");
             }else {
                 return  new restful("passworserro",null,"t");
             }

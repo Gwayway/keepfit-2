@@ -1,12 +1,14 @@
 package com.willbest.keepfit.service;
 
 import com.willbest.keepfit.bean.course;
+import com.willbest.keepfit.bean.message;
+import com.willbest.keepfit.bean.student;
 import com.willbest.keepfit.bean.teacher;
 import com.willbest.keepfit.mapper.CourseMapper;
+import com.willbest.keepfit.mapper.MessageMapper;
+import com.willbest.keepfit.mapper.StudentMapper;
 import com.willbest.keepfit.mapper.TeacherMapper;
 import com.willbest.keepfit.utilandpojo.restful;
-import org.neo4j.ogm.model.Node;
-import org.neo4j.ogm.response.model.NodeModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +18,29 @@ public class CourseService {
     CourseMapper courseMapper;
     @Autowired
     TeacherMapper teacherMapper;
+    @Autowired
+    StudentMapper studentMapper;
+    @Autowired
+    MessageMapper messageMapper;
+    //教师发布课程
     public restful releasecourse(course course, teacher teacher){
-
-        NodeModel node=new NodeModel(teacherMapper.findByPhonenum(teacher.getPhonenum()).getId());
-        course.setNode(node);
-        courseMapper.save(course);
-        return  new restful("200",course,"k");
+        try{
+            teacher neotec=teacherMapper.findByPhonenum(teacher.getPhonenum());
+            course.setTeacher(neotec);
+            courseMapper.save(course);
+        }catch (Exception e){
+            System.out.println(e);
+            return new restful("courseadderro",null,"k");
+        }
+        return  new restful("succe",teacher.getPhonenum(),"k");
+    }
+    //学生预约课程
+    public restful ordercourse(course course, message message,student student){
+        teacher neotec=teacherMapper.findTecByCourseId(course.getId());
+        student neostu=studentMapper.findByPhonenum(student.getPhonenum());
+        message.setStudent(neostu);
+        message.setTeacher(neotec);
+        messageMapper.save(message);
+        return new restful("succe",null,"m");
     }
 }
