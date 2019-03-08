@@ -1,6 +1,4 @@
 package com.willbest.keepfit.mapper;
-
-import com.willbest.keepfit.bean.course;
 import com.willbest.keepfit.bean.teacher;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;

@@ -26,6 +26,7 @@ public class MessageService {
             case "acc":{
                 message.setDealsate("acc");
                 messageMapper.save(message);
+                courseMapper.createRelationOrder(student,course);
                 chatmsg.setDealstate("acc");
                 return chatmsg;
             }
