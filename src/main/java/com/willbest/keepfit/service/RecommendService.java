@@ -6,18 +6,20 @@ import com.willbest.keepfit.mapper.RecommendMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
 public class RecommendService {
     @Autowired
     RecommendMapper recommendMapper;
-    public Set<course> recommend(String phonenum){
+    public List<course> recommend(String phonenum){
         Set<course> courseSet=recommendMapper.getAllcourseByStu(phonenum);
         int size=courseSet.size();
         if(size==0){
-
+            return  null;
         }else {
             Set<student> studentSet1=new HashSet<>();
             Set<course>  courseSet1=new HashSet<>();
@@ -33,11 +35,21 @@ public class RecommendService {
                     courseSet1.add(course);
                 }
             }
-            Set<course> result=new HashSet<>();
-            result.clear();
-            result.addAll(courseSet1);
-            result.removeAll(courseSet);
-            courseSet=result;
+            courseSet1.removeAll(courseSet);
+            int len=courseSet1.size();
+            List<course> courseList=new ArrayList<>(courseSet1);
+            if (len<5||len==5){
+                return courseList;
+            }else {
+                List<course> recomList=new ArrayList<>();
+                for (int i=0;i<5;i++){
+                    int index=new Double(Math.random()*len).intValue();
+                    recomList.add(courseList.get(index));
+                }
+                courseSet1=new HashSet<>(recomList);
+                recomList=new ArrayList<>(courseSet1);
+                return  recomList;
+            }
         }
     }
 }
