@@ -3,6 +3,7 @@ package com.willbest.keepfit.controller;
 import com.willbest.keepfit.utilandpojo.chatmsg;
 import com.willbest.keepfit.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,7 @@ public class MessageController {
     MessageService messageService;
     @MessageMapping("/deal/{getphonenum}")
     @SendTo("/topic/deal/{getphonenum}")
-    public chatmsg deal(String senphonenum,String getphonenum,Long courseid,String dealstate){
+    public chatmsg deal(String senphonenum, @Param("getphonenum") String getphonenum, Long courseid, String dealstate){
         chatmsg chatmsg=new chatmsg(courseid,senphonenum,getphonenum,dealstate);
         return  messageService.deal(chatmsg);
     }
@@ -21,7 +22,7 @@ public class MessageController {
     @MessageMapping("/order/{getphonenum}")
     @SendTo("/topic/order/{getphonenum}")
     //处理order,发送消息到到教练订阅地址
-    public chatmsg  order(String senphonenum,String getphonenum,Long courseid,String dealstate){
+    public chatmsg  order(String senphonenum,@Param("getphonenum") String getphonenum,Long courseid,String dealstate){
         chatmsg chatmsg=new chatmsg(courseid,senphonenum,getphonenum,dealstate);
         return chatmsg;
     }

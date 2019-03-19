@@ -26,6 +26,7 @@ public class CourseService {
     public restful releasecourse(course course, teacher teacher){
         try{
             teacher neotec=teacherMapper.findByPhonenum(teacher.getPhonenum());
+            course.setCourseownner(neotec.getUsername());
             course.setTeacher(neotec);
             courseMapper.save(course);
         }catch (Exception e){
@@ -38,6 +39,8 @@ public class CourseService {
     public restful ordercourse(course course, message message,student student){
         teacher neotec=teacherMapper.findTecByCourseId(course.getId());
         student neostu=studentMapper.findByPhonenum(student.getPhonenum());
+        message.setStudentphonenum(neostu.getPhonenum());
+        message.setSendname(neostu.getUsername());
         message.setStudent(neostu);
         message.setTeacher(neotec);
         messageMapper.save(message);
