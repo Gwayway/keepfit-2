@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ListController {
     @Autowired
     ListService listService;
-    public restful listdata(HttpServletRequest request,String type,Integer currentpage,Integer pagesize){
-        return  listService.list(request,new PageList(currentpage,pagesize,type));
+    public restful listdata(HttpServletRequest request,String type,Integer currentpage,Integer pagesize,Long depent){
+        return  listService.list(request,new PageList(currentpage,pagesize,type,depent));
     }
 }
