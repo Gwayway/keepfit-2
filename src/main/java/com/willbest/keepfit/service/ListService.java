@@ -16,6 +16,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 @Service
 public class ListService {
     @Autowired
@@ -26,7 +28,7 @@ public class ListService {
     CommentMapper commentMapper;
     public  restful list(HttpServletRequest request, PageList pagelist){//course全部，stucourse学生的课，teccourse老师课，
         String type=pagelist.getType();
-        Pageable pageable = PageRequest.of(pagelist.getCurrentPage(),pagelist.getPageSize(),new Sort(Sort.Direction.ASC,"id"));
+        Pageable pageable =PageRequest.of(pagelist.getCurrentPage(),pagelist.getPageSize());
         if (type!=null) {
             switch (type) {
                 case "course": {
@@ -37,9 +39,9 @@ public class ListService {
                     Page<course> courses = courseMapper.findcoursesByStudentPhonenum((String) request.getSession().getAttribute("phonenum"), pageable);
                     return new restful("succes", courses.getContent(), "stucourselist");
                 }
-                case "tescourse": {
-                    Page<course> courses = courseMapper.findcoursesByTeacherPhonenum((String) request.getSession().getAttribute("phonenum"), pageable);
-                    return new restful("succes", courses.getContent(), "teccoprselist");
+                case "teccourse": {
+                    Page<course> courses = courseMapper.findcoursesByTeacherPhonenum((String) request.getSession().getAttribute("phonenum"),pageable);
+                    return new restful("succes", courses, "teccoprselist");
                 }
                 case "stumessage": {
                     Page<message> messages = messageMapper.findmessagesByStudentPhonenum((String) request.getSession().getAttribute("phonenum"), pageable);

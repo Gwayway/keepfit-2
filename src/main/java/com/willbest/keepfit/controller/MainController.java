@@ -6,16 +6,17 @@ import com.willbest.keepfit.service.UserService;
 import com.willbest.keepfit.utilandpojo.restful;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/cis")
+@RequestMapping(value = "/cis",method = RequestMethod.POST)
 public class MainController {
     @Autowired
     UserService userService;
-    @RequestMapping("/c1")
+    @RequestMapping(value = "/c1",method = RequestMethod.POST)
     public restful createstudent(String username, String password, String nickname, String phonenum){
         student student=new student(username,password,nickname,phonenum);
         return userService.createstudent(student);

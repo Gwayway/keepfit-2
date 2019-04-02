@@ -9,14 +9,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 public class InterceptorConfig extends WebMvcConfigurationSupport {
     @Autowired
     LoginInterceptor loginInterceptor;
+
     @Override
-    public void addInterceptors(InterceptorRegistry registry) {
+    protected void addInterceptors(InterceptorRegistry registry) {
         super.addInterceptors(registry);
         registry.addInterceptor(loginInterceptor)
-                .addPathPatterns("/***")
-                .excludePathPatterns("/cis/l1")
-                .excludePathPatterns("/cis/l2")
-                .excludePathPatterns("/cis/c1")
-                .excludePathPatterns("/cis/c2");
+                .addPathPatterns("/**")
+                .excludePathPatterns("/cis/**");
     }
 }

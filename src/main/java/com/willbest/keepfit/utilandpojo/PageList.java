@@ -3,8 +3,8 @@ package com.willbest.keepfit.utilandpojo;
 import lombok.Data;
 @Data
 public class PageList{
-    private  Integer currentPage=1;
-    private  Integer pageSize=10;
+    private  Integer currentPage;
+    private  Integer pageSize;
     private  String type;
     private  Long depent;
 
