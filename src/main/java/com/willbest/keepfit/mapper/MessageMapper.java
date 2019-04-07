@@ -13,5 +13,4 @@ public interface MessageMapper extends Neo4jRepository<message,Long> {
     Page<message> findmessagesByTeacherPhonenum(@Param("phonenum") String phonenum, Pageable pageable);
     @Query(value = "match (Student:student)-[Send:send]->(Message:message) where Student.phonenum={phonenum}AND Message.dealsate<>'nul' return Message",countQuery ="match (Student:student)-[Send:send]->(Message:message) where Student.phonenum={phonenum}AND Message.dealsate<>'null' return count(*)" )
     Page<message> findmessagesByStudentPhonenum(@Param("phonenum") String phonenum, Pageable pageable);
-
 }

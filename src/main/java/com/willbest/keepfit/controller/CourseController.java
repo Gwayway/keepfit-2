@@ -27,13 +27,13 @@ public class CourseController {
             picurl.add(i);
         }
         teacher teacher=new teacher(null,null,null,(String) request.getSession().getAttribute("phonenum"));
-        course course=new course(null,coursename,picurl,null,introduce,null);
+        course course=new course(null,coursename,picurl,null,introduce,null,(String) request.getSession().getAttribute("phonenum"));
         return  courseService.releasecourse(course,teacher);
     }
     @RequestMapping("/o")
     public restful ordercourse(HttpServletRequest request,Long courseid,String teschername,String coursename){
         student student=new student(null,null,null,(String) request.getSession().getAttribute("phonenum"));
-        course course=new course(courseid,null,null,null,null,null);
+        course course=new course(courseid,null,null,null,null,null,null);
         message message=new message(courseid,teschername,null,coursename,null,null,null);
         return courseService.ordercourse(course,message,student);
 

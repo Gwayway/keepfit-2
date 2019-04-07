@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -14,8 +15,8 @@ import java.util.List;
 public class RecommendController {
     @Autowired
     RecommendService recommendService;
-    @RequestMapping(value = "/sturec",method = RequestMethod.POST)
-    public List<course> recommend(String phonenum){
-        return recommendService.recommend(phonenum);
+    @RequestMapping(value = "/sturec")
+    public List<course> recommend(HttpServletRequest request){
+        return recommendService.recommend(request);
     }
 }

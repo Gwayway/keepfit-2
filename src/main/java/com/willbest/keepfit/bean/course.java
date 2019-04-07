@@ -15,15 +15,17 @@ public class course {
     private List<String> picurl;
     private  String courseownner;
     private  String introduce;
+    private String phonenum;
     @Relationship(type = "release",direction = Relationship.INCOMING)
     private teacher teacher;
 
-    public course(Long id, String coursename, List<String> picurl, String courseownner, String introduce, com.willbest.keepfit.bean.teacher teacher) {
+    public course(Long id, String coursename, List<String> picurl, String courseownner, String introduce, com.willbest.keepfit.bean.teacher teacher,String phonenum) {
         this.id = id;
         this.coursename = coursename;
         this.picurl = picurl;
         this.courseownner = courseownner;
         this.introduce = introduce;
         this.teacher = teacher;
+        this.phonenum=phonenum;
     }
 }
