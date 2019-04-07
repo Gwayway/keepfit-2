@@ -37,7 +37,7 @@ public class UserService<T>{
         if (state){
             if (student.getPassword().equals(neostu.getPassword())){
                 request.getSession().setAttribute("phonenum",neostu.getPhonenum());
-                return  new restful("loginsucce",student.getPhonenum()+":"+neostu.getUsername(),"s");
+                return  new restful("loginsucce",neostu.getUsername(),"s");
             }else {
                 return  new restful("passworserro",null,"s");
             }
@@ -52,7 +52,7 @@ public class UserService<T>{
             return new restful("exist",null,"t");
         }else {
             teacherMapper.save(teacher);
-            return  new restful("createsucce",teacher.getPhonenum()+":"+teacher.getUsername(),"t");
+            return  new restful("createsucce",teacher.getUsername(),"t");
         }
     }
     public restful login2(teacher teacher,HttpServletRequest request){

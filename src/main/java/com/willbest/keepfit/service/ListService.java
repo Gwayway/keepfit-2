@@ -52,7 +52,7 @@ public class ListService {
                     return new restful("succes", messages.getContent(), "tecmessagelist");
                 }
                 case "comment": {
-                    Page<comment> comments = commentMapper.findAllById(pagelist.getDepent(), pageable);
+                    Page<comment> comments = commentMapper.findByCourseid(pagelist.getDepent(), pageable);
                     return new restful("succes", comments.getContent(), "commentslist");
                 }
             }

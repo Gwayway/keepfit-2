@@ -10,6 +10,8 @@ import com.willbest.keepfit.utilandpojo.restful;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Service
 public class CommentService {
     @Autowired
@@ -18,9 +20,11 @@ public class CommentService {
     StudentMapper studentMapper;
     @Autowired
     CommentMapper commentMapper;
-    public restful comment(comment comment){
+    public restful comment(comment comment, HttpServletRequest request){
         course course=courseMapper.findCourseById(comment.getCourseid());
-        student student=studentMapper.findByPhonenum(comment.getOwnnerphonenum());
+        student student=studentMapper.findByPhonenum((String) request.getSession().getAttribute("phonenum"));
+        comment.setOwnnerphonenum((String) request.getSession().getAttribute("phonenum"));
+        comment.setContentownner(student.getUsername());
         comment.setStudent(student);
         comment.setCourse(course);
         commentMapper.save(comment);

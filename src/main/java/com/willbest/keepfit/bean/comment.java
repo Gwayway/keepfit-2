@@ -1,5 +1,6 @@
 package com.willbest.keepfit.bean;
 
+import com.willbest.keepfit.utilandpojo.date;
 import lombok.Data;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
@@ -16,6 +17,7 @@ public class comment {
     private  String contentownner;
     private  String ownnerphonenum;
     private Long courseid;
+    private  String dates=new date().getDate();
     @Relationship(type = "sendcom",direction = Relationship.INCOMING)
     private student student;
     @Relationship(type = "comment",direction = Relationship.OUTGOING)

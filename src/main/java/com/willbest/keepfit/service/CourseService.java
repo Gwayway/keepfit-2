@@ -46,4 +46,8 @@ public class CourseService {
         messageMapper.save(message);
         return new restful("succe",null,"m");
     }
+    //获取课程详细
+    public restful getcourse(Long courseid){
+        return  new restful("succe",courseMapper.findCourseById(courseid),"course");
+    }
 }

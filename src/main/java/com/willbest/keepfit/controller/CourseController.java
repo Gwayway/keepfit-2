@@ -38,4 +38,8 @@ public class CourseController {
         return courseService.ordercourse(course,message,student);
 
     }
+    @RequestMapping("/gc")
+    public restful getcourse(Long courseid){
+        return  courseService.getcourse(courseid);
+    }
 }
