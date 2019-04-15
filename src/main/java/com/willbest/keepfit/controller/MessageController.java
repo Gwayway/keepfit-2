@@ -14,14 +14,14 @@ public class MessageController {
     @Autowired
     MessageService messageService;
     @MessageMapping("/deal/{getphonenum}")
-    @SendTo("/topic/deal/{getphonenum}")
+    @SendTo("/topic/order/{getphonenum}")
     public chatmsg deal(String senphonenum, @DestinationVariable("getphonenum") String getphonenum, Long courseid, String dealstate){
         chatmsg chatmsg=new chatmsg(courseid,senphonenum,getphonenum,dealstate);
         return  messageService.deal(chatmsg);
     }
 
     @MessageMapping("/order/{getphonenum}")
-    @SendTo("/topic/order/{getphonenum}")
+    @SendTo("/topic/deal/{getphonenum}")
     //处理order,发送消息到到教练订阅地址
     public chatmsg  order(String senphonenum, @DestinationVariable("getphonenum") String getphonenum, Long courseid){
         chatmsg chatmsg=new chatmsg(courseid,senphonenum,getphonenum,"nul");

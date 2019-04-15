@@ -3,6 +3,7 @@ package com.willbest.keepfit.config;
 import com.willbest.keepfit.interceptor.LoginInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 @Configuration
@@ -16,5 +17,14 @@ public class InterceptorConfig extends WebMvcConfigurationSupport {
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/cis/**");
+    }
+
+    @Override
+    protected void addCorsMappings(CorsRegistry registry) {
+        super.addCorsMappings(registry);
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowCredentials(true)
+                .allowedMethods("*");
     }
 }

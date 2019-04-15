@@ -1,4 +1,5 @@
 package com.willbest.keepfit.bean;
+import com.willbest.keepfit.utilandpojo.date;
 import lombok.Data;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
@@ -16,6 +17,7 @@ public class course {
     private  String courseownner;
     private  String introduce;
     private String phonenum;
+    private  String dates=new date().getDate();
     @Relationship(type = "release",direction = Relationship.INCOMING)
     private teacher teacher;
 

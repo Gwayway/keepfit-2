@@ -7,6 +7,7 @@ public class restful<T> {
     private  String msg;
     private String type;
     private  T data;
+    private String session=null;
     public  restful(String msg,T data,String type){
         this.msg=msg;
         this.data=data;

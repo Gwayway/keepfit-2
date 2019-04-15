@@ -15,7 +15,9 @@ import java.io.PrintWriter;
 public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        System.out.println(request.getSession());
         String phonenum=(String) request.getSession().getAttribute("phonenum");
+        System.out.println("拦截的电话好吗："+phonenum);
         if (phonenum==null){
             System.out.println("没有登陆");
             return  false;

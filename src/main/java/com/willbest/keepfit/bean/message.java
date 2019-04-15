@@ -15,6 +15,7 @@ public class message {
     private String sendname;
     private  String coursename;
     private String studentphonenum;
+    private String teacherphonenum;//后来添加
     private  String dates=new date().getDate();
     private  String dealsate="nul";//"nul"未处理"rej"拒绝"acc"接受
 

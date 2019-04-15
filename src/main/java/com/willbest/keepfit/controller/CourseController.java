@@ -20,7 +20,7 @@ public class CourseController {
     @Autowired
     CourseService courseService;
     @RequestMapping("/ac")
-    public restful addcourse(String coursename, String introduce, HttpServletRequest request,String ...picurls ){
+    public restful addcourse(String coursename, String introduce, HttpServletRequest request,String[] picurls ){
         //多图处理
         List picurl=new ArrayList();
         for(String i:picurls){

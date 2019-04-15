@@ -11,6 +11,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Service
 public class UserService<T>{
@@ -30,14 +31,16 @@ public class UserService<T>{
             return  new restful("createsucce",student.getPhonenum()+":"+student.getUsername(),"s");
         }
     }
-    public restful login1(student student, HttpServletRequest request){
+    public restful login1(student student, HttpServletRequest request, HttpSession session){
         String phonenum=student.getPhonenum();
         boolean state=existif.exist(phonenum);
         student neostu= studentMapper.findByPhonenum(phonenum);
         if (state){
             if (student.getPassword().equals(neostu.getPassword())){
                 request.getSession().setAttribute("phonenum",neostu.getPhonenum());
-                return  new restful("loginsucce",neostu.getUsername(),"s");
+                restful data=new restful<>("loginsucce",neostu.getUsername(),"s");
+                data.setSession(session.getId());
+                return  data;
             }else {
                 return  new restful("passworserro",null,"s");
             }
@@ -62,7 +65,7 @@ public class UserService<T>{
         if (state){
             if (teacher.getPassword().equals(neostec.getPassword())){
                 request.getSession().setAttribute("phonenum",neostec.getPhonenum());
-                return  new restful("loginsucce",teacher.getPhonenum()+":"+neostec.getUsername(),"t");
+                return  new restful("loginsucce",neostec.getUsername(),"t");
             }else {
                 return  new restful("passworserro",null,"t");
             }

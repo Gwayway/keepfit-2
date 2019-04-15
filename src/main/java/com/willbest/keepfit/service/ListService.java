@@ -41,7 +41,7 @@ public class ListService {
                 }
                 case "teccourse": {
                     Page<course> courses = courseMapper.findcoursesByTeacherPhonenum((String) request.getSession().getAttribute("phonenum"),pageable);
-                    return new restful("succes", courses, "teccoprselist");
+                    return new restful("succes", courses.getContent(), "teccoprselist");
                 }
                 case "stumessage": {
                     Page<message> messages = messageMapper.findmessagesByStudentPhonenum((String) request.getSession().getAttribute("phonenum"), pageable);
