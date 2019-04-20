@@ -58,14 +58,16 @@ public class UserService<T>{
             return  new restful("createsucce",teacher.getUsername(),"t");
         }
     }
-    public restful login2(teacher teacher,HttpServletRequest request){
+    public restful login2(teacher teacher,HttpServletRequest request,HttpSession session){
         String phonenum=teacher.getPhonenum();
         boolean state=existif.exist(phonenum);
         teacher neostec= teacherMapper.findByPhonenum(phonenum);
         if (state){
             if (teacher.getPassword().equals(neostec.getPassword())){
                 request.getSession().setAttribute("phonenum",neostec.getPhonenum());
-                return  new restful("loginsucce",neostec.getUsername(),"t");
+                restful data=new restful("loginsucce",neostec.getUsername(),"t");
+                data.setSession(session.getId());
+                return data;
             }else {
                 return  new restful("passworserro",null,"t");
             }

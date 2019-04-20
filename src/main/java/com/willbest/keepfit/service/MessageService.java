@@ -1,10 +1,12 @@
 package com.willbest.keepfit.service;
 
+import com.willbest.keepfit.bean.Order_relationship;
 import com.willbest.keepfit.bean.course;
 import com.willbest.keepfit.bean.message;
 import com.willbest.keepfit.bean.student;
 import com.willbest.keepfit.mapper.CourseMapper;
 import com.willbest.keepfit.mapper.MessageMapper;
+import com.willbest.keepfit.mapper.RelationshipMapper;
 import com.willbest.keepfit.mapper.StudentMapper;
 import com.willbest.keepfit.utilandpojo.chatmsg;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ public class MessageService {
     CourseMapper courseMapper;
     @Autowired
     MessageMapper messageMapper;
+    @Autowired
+    RelationshipMapper relationshipMapper;
     public chatmsg deal(chatmsg chatmsg){
         course course=courseMapper.findCourseById(chatmsg.getCourseid());
         student student=studentMapper.findByPhonenum(chatmsg.getGetphonenum());
@@ -26,7 +30,7 @@ public class MessageService {
             case "acc":{
                 message.setDealsate("acc");
                 messageMapper.save(message);
-                courseMapper.createRelationOrder(student,course);
+                relationshipMapper.save(new Order_relationship(student,course));
                 chatmsg.setDealstate("acc");
                 return chatmsg;
             }

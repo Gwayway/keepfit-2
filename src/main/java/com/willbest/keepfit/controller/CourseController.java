@@ -20,20 +20,20 @@ public class CourseController {
     @Autowired
     CourseService courseService;
     @RequestMapping("/ac")
-    public restful addcourse(String coursename, String introduce, HttpServletRequest request,String[] picurls ){
+    public restful addcourse(String coursename, String introduce, HttpServletRequest request,String[] picurls,String tag){
         //多图处理
         List picurl=new ArrayList();
         for(String i:picurls){
             picurl.add(i);
         }
         teacher teacher=new teacher(null,null,null,(String) request.getSession().getAttribute("phonenum"));
-        course course=new course(null,coursename,picurl,null,introduce,null,(String) request.getSession().getAttribute("phonenum"));
+        course course=new course(null,coursename,picurl,null,introduce,null,(String) request.getSession().getAttribute("phonenum"),tag);
         return  courseService.releasecourse(course,teacher);
     }
     @RequestMapping("/o")
     public restful ordercourse(HttpServletRequest request,Long courseid,String teschername,String coursename){
         student student=new student(null,null,null,(String) request.getSession().getAttribute("phonenum"));
-        course course=new course(courseid,null,null,null,null,null,null);
+        course course=new course(courseid,null,null,null,null,null,null,null);
         message message=new message(courseid,teschername,null,coursename,null,null,null);
         return courseService.ordercourse(course,message,student);
 
@@ -41,5 +41,9 @@ public class CourseController {
     @RequestMapping("/gc")
     public restful getcourse(Long courseid){
         return  courseService.getcourse(courseid);
+    }
+    @RequestMapping("/like")
+    public  String course_like(Long course_id,HttpServletRequest request){
+        return courseService.course_like(course_id,request);
     }
 }

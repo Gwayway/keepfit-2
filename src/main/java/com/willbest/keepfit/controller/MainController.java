@@ -35,9 +35,9 @@ public class MainController {
         return  userService.createteacher(teacher);
     }
     @RequestMapping("l2")
-    public restful loginteachaer(String phonenum,String password,HttpServletRequest request){
+    public restful loginteachaer(String phonenum,String password,HttpServletRequest request,HttpSession session){
         System.out.println(request);
         teacher teacher=new teacher(null,null,password,phonenum);
-        return userService.login2(teacher,request);
+        return userService.login2(teacher,request,session);
     }
 }

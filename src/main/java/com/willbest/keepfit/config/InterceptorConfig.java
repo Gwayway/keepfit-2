@@ -16,7 +16,8 @@ public class InterceptorConfig extends WebMvcConfigurationSupport {
         super.addInterceptors(registry);
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/cis/**");
+                .excludePathPatterns("/cis/**")
+                .excludePathPatterns("/file/**");
     }
 
     @Override
