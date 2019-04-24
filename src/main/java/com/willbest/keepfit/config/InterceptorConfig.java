@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 @Configuration
 public class InterceptorConfig extends WebMvcConfigurationSupport {
@@ -16,8 +17,7 @@ public class InterceptorConfig extends WebMvcConfigurationSupport {
         super.addInterceptors(registry);
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/cis/**")
-                .excludePathPatterns("/file/**");
+                .excludePathPatterns("/cis/**","/files/**","/tuku/**");
     }
 
     @Override
@@ -27,5 +27,12 @@ public class InterceptorConfig extends WebMvcConfigurationSupport {
                 .allowedOrigins("*")
                 .allowCredentials(true)
                 .allowedMethods("*");
+    }
+
+    @Override
+    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+        super.addResourceHandlers(registry);
+        registry.addResourceHandler("/tuku/**")
+                .addResourceLocations("file:E://kitpic/");
     }
 }

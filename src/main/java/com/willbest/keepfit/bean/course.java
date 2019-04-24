@@ -15,7 +15,7 @@ public class course {
     @Id
     @GeneratedValue
     private  Long id;
-    private  String img_src;
+    private  String img_src=null;
     private  Integer start_count=0;
     private  String course_type="运动";
     private String title;
@@ -40,10 +40,12 @@ public class course {
         this.introduce = introduce;
         this.teacher = teacher;
         this.phonenum=phonenum;
-        if(!picurl.isEmpty()){
+        if(picurl!=null){
             this.img_num=picurl.size();
+            this.img_src=picurl.get(0);
+        }else {
+            this.img_num=0;
         }
-        this.img_src=picurl.get(0);
         this.title=coursename;
         this.course_type=tag;
     }

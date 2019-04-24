@@ -46,4 +46,8 @@ public class CourseController {
     public  String course_like(Long course_id,HttpServletRequest request){
         return courseService.course_like(course_id,request);
     }
+    @RequestMapping("/canlo")
+    public  void cancel_order(String phonenum,Integer courseid){
+        courseService.cancel_order2(phonenum,courseid);
+    }
 }

@@ -59,6 +59,7 @@ public class CourseService {
         message.setSendname(neostu.getUsername());
         message.setStudent(neostu);
         message.setTeacher(neotec);
+        message.setTeacherphonenum(neotec.getPhonenum());
         messageMapper.save(message);
         return new restful("succe",null,"m");
     }
@@ -80,5 +81,14 @@ public class CourseService {
             return "err";
         }
         return "like:ok";
+    }
+    //取消预约
+    public  void  cancel_oder(String phonenum,Integer courseid){
+        Order_relationship relation_stu_cour=courseMapper.findRelation_stu_cour(phonenum,courseid);
+        relation_stu_cour.setLife(0);
+        relationshipMapper.save(relation_stu_cour);
+    }
+    public void  cancel_order2(String phonenum,Integer courseid){
+        courseMapper.findRelation_stu_cour2(phonenum,courseid);
     }
 }

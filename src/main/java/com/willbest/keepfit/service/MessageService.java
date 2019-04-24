@@ -43,4 +43,16 @@ public class MessageService {
         }
         return chatmsg;
     }
+    public String deal_2(Long msgid,String dealstate){
+        message message=messageMapper.findBymsgId(msgid);
+        System.out.println(message.getStudentphonenum());
+        student student=studentMapper.findByPhonenum(message.getStudentphonenum());
+        course course=courseMapper.findCourseById(message.getCourseid());
+        message.setDealsate(dealstate);
+        messageMapper.save(message);
+        if(dealstate.equals("acc")){
+            relationshipMapper.save(new Order_relationship(student,course));
+        }
+        return  "msgdeal";
+    }
 }

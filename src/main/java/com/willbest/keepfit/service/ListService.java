@@ -80,7 +80,7 @@ public class ListService {
                 return like_list(request,pageList);
             }
             case 1:{
-                Page<course> courses = courseMapper.findcoursesByTeacherPhonenum((String) request.getSession().getAttribute("phonenum"),pageable);
+                Page<course> courses = courseMapper.findcoursesByStudentPhonenum((String) request.getSession().getAttribute("phonenum"),pageable);
                 return courses.getContent();
             }
             case 2:{

@@ -12,7 +12,7 @@ public class Order_relationship {
     private student student;
     @EndNode
     private course course;
-
+    private Integer life=1;
     public Order_relationship(com.willbest.keepfit.bean.student student, com.willbest.keepfit.bean.course course) {
         this.student = student;
         this.course = course;
