@@ -50,4 +50,17 @@ public class CourseController {
     public  void cancel_order(String phonenum,Integer courseid){
         courseService.cancel_order2(phonenum,courseid);
     }
+    @RequestMapping("/set")
+    public  String  setCourse(Long courseid,String coursename,String introduce, String[] picurls){
+        List picurl=new ArrayList();
+        for(String i:picurls){
+            picurl.add(i);
+        }
+        return courseService.setCourse(courseid,coursename,introduce,picurl);
+
+    }
+    @RequestMapping("/canlcourse")
+    public String cancelCourse(Integer courseid){
+        return courseService.cancelCourse(courseid);
+    }
 }

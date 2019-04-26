@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Service
 public class CourseService {
@@ -90,5 +91,19 @@ public class CourseService {
     }
     public void  cancel_order2(String phonenum,Integer courseid){
         courseMapper.findRelation_stu_cour2(phonenum,courseid);
+    }
+    //删除课程
+    public String cancelCourse(Integer couserid){
+        courseMapper.deletecourseByCourseid(couserid);
+        return "deltok";
+    }
+    //更改课程信息
+    public  String setCourse(Long courseid,String coursename,String introduce, List<String> picurls){
+        course course_neo=courseMapper.findCourseById(courseid);
+        course_neo.setCoursename(coursename);
+        course_neo.setPicurl(picurls);
+        course_neo.setIntroduce(introduce);
+        courseMapper.save(course_neo);
+        return "okset";
     }
 }

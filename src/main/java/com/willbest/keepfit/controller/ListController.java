@@ -19,6 +19,7 @@ public class ListController {
     ListService listService;
     @RequestMapping(value = "/ls",method = RequestMethod.GET)
     public restful listdata(HttpServletRequest request,String type,Integer currentpage,Integer pagesize,Long depent){
+        System.out.println(listService.list(request,new PageList(currentpage,pagesize,type,depent)));
         return  listService.list(request,new PageList(currentpage,pagesize,type,depent));
     }
     @RequestMapping("/dbls")

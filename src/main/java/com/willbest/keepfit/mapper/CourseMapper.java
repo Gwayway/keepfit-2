@@ -27,4 +27,6 @@ public interface CourseMapper extends Neo4jRepository <course,Long>{
     Order_relationship findRelation_stu_cour(@Param("phonenum") String phonenum,@Param("courseid") Integer courseid);
     @Query("match(Student:student)-[Order:order]->(Course:course) where Student.phonenum={phonenum} AND id(Course)={courseid} DELETE Order")
     void findRelation_stu_cour2(@Param("phonenum") String phonenum,@Param("courseid") Integer courseid);
+    @Query("match(Course:course) where id(Course)={courseid} DETACH DELETE Course")
+    void  deletecourseByCourseid(@Param("courseid") Integer courseid);
 }
